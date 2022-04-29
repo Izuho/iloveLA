@@ -23,15 +23,6 @@ t:R
 s:R
 ~~~
 ~~~
-t [ -1  3 -3  0
-     3 -6  3  0
-    -3  3  0 -1
-     1  0  0  1 ] p
-where
-t:R^(2*4)
-p:R^(4*3)
-~~~
-~~~
 import numpy as np
 def myExpression(s, t):
 	# DeclIN
