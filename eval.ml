@@ -273,6 +273,8 @@ let rec test_param li param =
   match li with
   | (_,(v,(i,j)))::nli ->
      print_string ("\t"^v^"=np.random.randn("^(string_of_int i)^","^(string_of_int j)^")\n");
+     print_string ("\tprint('"^v^" : ')\n");
+     print_string ("\tprint("^v^")\n");
      test_param nli param
   | [] -> print_string ("\tprint(myExpression("^param^"))\n")
   
