@@ -19,6 +19,34 @@ let dict = ref []
 let dict2 = ref []
          
 let rec search_var v = List.assoc v (!dict)
+
+let rec eval_vec vec str i =
+  match vec with
+  | Vector (ii, nvec) ->
+     if str = "" then
+       eval_vec nvec (string_of_int ii) (i+1)
+     else
+       eval_vec nvec (str^", "^(string_of_int ii)) (i+1)
+  | EndVEC -> (("["^str^"]"), i)
+
+let rec eval_mat mat str i j =
+  match mat with
+  | Mat (vec, nmat) ->
+     let (v, x) = eval_vec vec "" 0 in
+     if i = -1 || i = x then
+       if str = "" then
+         eval_mat nmat v x (j+1)
+       else
+         eval_mat nmat (str^","^v) x (j+1)
+     else
+       (print_string ("mat "^str^(string_of_int i)^(string_of_int x)^" size is wrong");
+        raise ShapeErr)
+  | EndMAT ->
+     if j = 1 then
+       (str^"", (1,i))
+     else
+       ("["^str^"]", (j,i))
+
                      
 let rec eval_ans ans =
   (match ans with
@@ -40,7 +68,7 @@ let rec eval_ans ans =
                let b = string_of_int s1r in
                let c = string_of_int s2l in
                let d = string_of_int s2r in
-               print_string ("Plus with ("^a^","^b^") and ("^c^","^d^")");
+               print_string ("Plus with ("^a^","^b^") and ("^c^","^d^")\n");
                raise ShapeErr)
         else
           if s1r < 0 then
@@ -56,7 +84,7 @@ let rec eval_ans ans =
                let b = string_of_int s1r in
                let c = string_of_int s2l in
                let d = string_of_int s2r in
-               print_string ("Plus with ("^a^","^b^") and ("^c^","^d^")");
+               print_string ("Plus with ("^a^","^b^") and ("^c^","^d^")\n");
                raise ShapeErr)
       else
         if s2l < 0 then
@@ -73,7 +101,7 @@ let rec eval_ans ans =
                let b = string_of_int s1r in
                let c = string_of_int s2l in
                let d = string_of_int s2r in
-               print_string ("Plus with ("^a^","^b^") and ("^c^","^d^")");
+               print_string ("Plus with ("^a^","^b^") and ("^c^","^d^")\n");
                raise ShapeErr)
         else if s1l = s2l then
           if s1r < 0 then
@@ -89,14 +117,14 @@ let rec eval_ans ans =
                let b = string_of_int s1r in
                let c = string_of_int s2l in
                let d = string_of_int s2r in
-               print_string ("Plus with ("^a^","^b^") and ("^c^","^d^")");
+               print_string ("Plus with ("^a^","^b^") and ("^c^","^d^")\n");
                raise ShapeErr)
         else
           (let a = string_of_int s1l in
            let b = string_of_int s1r in
            let c = string_of_int s2l in
            let d = string_of_int s2r in
-           print_string ("Plus with ("^a^","^b^") and ("^c^","^d^")");
+           print_string ("Plus with ("^a^","^b^") and ("^c^","^d^")\n");
            raise ShapeErr)
    | Minus (ans1, ans2) ->
       let (a, (s1l,s1r)) = eval_ans ans1 in
@@ -116,7 +144,7 @@ let rec eval_ans ans =
                let b = string_of_int s1r in
                let c = string_of_int s2l in
                let d = string_of_int s2r in
-               print_string ("Minus with ("^a^","^b^") and ("^c^","^d^")");
+               print_string ("Minus with ("^a^","^b^") and ("^c^","^d^")\n");
                raise ShapeErr)
         else
           if s1r < 0 then
@@ -132,7 +160,7 @@ let rec eval_ans ans =
                let b = string_of_int s1r in
                let c = string_of_int s2l in
                let d = string_of_int s2r in
-               print_string ("Minus with ("^a^","^b^") and ("^c^","^d^")");
+               print_string ("Minus with ("^a^","^b^") and ("^c^","^d^")\n");
                raise ShapeErr)
       else
         if s2l < 0 then
@@ -149,7 +177,7 @@ let rec eval_ans ans =
                let b = string_of_int s1r in
                let c = string_of_int s2l in
                let d = string_of_int s2r in
-               print_string ("Minus with ("^a^","^b^") and ("^c^","^d^")");
+               print_string ("Minus with ("^a^","^b^") and ("^c^","^d^")\n");
                raise ShapeErr)
         else if s1l = s2l then
           if s1r < 0 then
@@ -165,14 +193,14 @@ let rec eval_ans ans =
                let b = string_of_int s1r in
                let c = string_of_int s2l in
                let d = string_of_int s2r in
-               print_string ("Minus with ("^a^","^b^") and ("^c^","^d^")");
+               print_string ("Minus with ("^a^","^b^") and ("^c^","^d^")\n");
                raise ShapeErr)
         else
           (let a = string_of_int s1l in
            let b = string_of_int s1r in
            let c = string_of_int s2l in
            let d = string_of_int s2r in
-           print_string ("Minus with ("^a^","^b^") and ("^c^","^d^")");
+           print_string ("Minus with ("^a^","^b^") and ("^c^","^d^")\n");
            raise ShapeErr)
    | Mult (ans1, ans2) ->
       let (a, (s1l,s1r)) = eval_ans ans1 in
@@ -188,7 +216,7 @@ let rec eval_ans ans =
          let b = string_of_int s1r in
          let c = string_of_int s2l in
          let d = string_of_int s2r in
-         print_string ("Mult with ("^a^","^b^") and ("^c^","^d^")");
+         print_string ("Mult with ("^a^","^b^") and ("^c^","^d^")\n");
          raise ShapeErr)
    | Tenti (ans1) ->
       let (a, (b, c)) = eval_ans ans1 in
@@ -203,7 +231,7 @@ let rec eval_ans ans =
       else
         let b = string_of_int b in
         let c = string_of_int c in
-        (print_string ("Inv with ("^b^","^c^")");
+        (print_string ("Inv with ("^b^","^c^")\n");
          raise ShapeErr)
    | AInt (n) ->
       (string_of_int n, (-2,-2))
@@ -211,39 +239,16 @@ let rec eval_ans ans =
       (try
          let a = search_var v in a
        with Not_found ->
-         (print_string ("No such AVar("^v^")");
+         (print_string ("No such AVar("^v^")\n");
           raise NoAVarErr))
    | AZeros ->
-      ("0", (-1,-1)))
-
+      ("0", (-1,-1))
+   | AMat mat ->
+      let (v,(i,j)) = eval_mat mat "" (-1) 0 in
+      ("np.array("^v^")",(i,j))
+  )
+        
 let rec eval_env env =
-  let rec eval_vec vec str i =
-    match vec with
-    | Vector (ii, nvec) ->
-       if str = "" then
-         eval_vec nvec (string_of_int ii) (i+1)
-       else
-          eval_vec nvec (str^", "^(string_of_int ii)) (i+1)
-    | EndVEC -> (("["^str^"]"), i)
-  in
-  let rec eval_mat mat str i j =
-    match mat with
-    | Mat (vec, nmat) ->
-       let (v, x) = eval_vec vec "" 0 in
-       if i = -1 || i = x then
-         if str = "" then
-           eval_mat nmat v x (j+1)
-         else
-           eval_mat nmat (str^","^v) x (j+1)
-       else
-         (print_string ("mat "^str^(string_of_int i)^(string_of_int x)^" size is wrong");
-          raise ShapeErr)
-    | EndMAT ->
-       if j = 1 then
-         (str^"", (1,i))
-       else
-         ("["^str^"]", (j,i))
-  in
   match env with
   | DeclIN (v, i, j, nenv) ->
      dict := (v, (v, (i,j)))::(!dict);

@@ -1,14 +1,10 @@
 import numpy as np
-def myExpression(g, c, a):
+def myExpression(p, t):
 	# DeclIN
-	b = np.array([[3, -1],[55, 7],[3, 4]])
 	# DeclIN
-	d = np.array([[6],[7],[6]])
-	# DeclIN
-	return ((0)-(2*np.dot((((b)+(a)).T),(np.dot((np.power(np.linalg.inv(c), 2)),(d))))))+((g).T)
+	return np.dot((t),(np.dot((np.array([[-1, 3, -3, 1],[3, -6, 3, 0],[-3, 3, 0, 0],[1, 0, 0, 0]])),(p))))
 
 if __name__ == '__main__':
-	g=np.random.randn(1,2)
-	c=np.random.randn(3,3)
-	a=np.random.randn(3,2)
-	print(myExpression(g, c, a))
+	p=np.random.randn(4,3)
+	t=np.random.randn(2,4)
+	print(myExpression(p, t))

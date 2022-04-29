@@ -42,6 +42,7 @@ semians_:
   | LPAREN MINUS subans RPAREN TENTI    { Tenti($3) }
   | LPAREN MINUS subans RPAREN POWERINT { Power($3,$5) }
   | LPAREN MINUS subans RPAREN          { $3 }
+  | LKAGI mat RKAGI                     { AMat($2) }
 
 semians:
     semians_ semians { Syntax.Mult($1,$2) }

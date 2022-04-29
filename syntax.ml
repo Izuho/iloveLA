@@ -23,6 +23,7 @@ type ans =
   | Power of ans * int
   | AInt of int
   | AVar of name
+  | AMat of mat
   | AZeros
 			  
 type sushiki =
