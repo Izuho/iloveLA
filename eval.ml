@@ -263,6 +263,14 @@ let rec eval_param li str =
      else
        eval_param nli (str^", "^v)
   | [] -> str
+
+let rec test_param li param =
+  match li with
+  | (_,(v,(i,j)))::nli ->
+     print_string ("\t"^v^"=np.random.randn("^(string_of_int i)^","^(string_of_int j)^")\n");
+     test_param nli param
+  | [] -> print_string ("\tprint(myExpression("^param^"))\n")
+  
      
 let rec eval_command cmd =
   let Sushiki (ans, env) = cmd in
@@ -271,4 +279,6 @@ let rec eval_command cmd =
   let (v,(i,j)) = eval_ans ans in
   print_string ("import numpy as np\ndef myExpression("^param^"):\n");
   print_string vv;
-  print_string ("\treturn "^v^"\n")
+  print_string ("\treturn "^v^"\n\n");
+  print_string ("if __name__ == '__main__':\n");
+  test_param (!dict2) param
