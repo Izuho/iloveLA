@@ -1,7 +1,7 @@
 # 情報演習3 
 # I❤️LA
 
-## リンク
+## 参考リンク、元論文など
 https://iheartla.github.io/
 
 ## 文法の制限
