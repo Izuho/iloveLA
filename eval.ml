@@ -276,12 +276,15 @@ let rec test_param li param =
      print_string ("\tprint('"^v^" : ')\n");
      print_string ("\tprint("^v^")\n");
      test_param nli param
-  | [] -> print_string ("\tprint(myExpression("^param^"))\n")
+  | [] ->
+     print_string ("\tprint('ans : ')\n");
+     print_string ("\tprint(myExpression("^param^"))\n")
   
      
 let rec eval_command cmd =
   let Sushiki (ans, env) = cmd in
   let vv = eval_env env in
+  dict2 := List.rev (!dict2);
   let param = eval_param (!dict2) "" in
   let (v,(i,j)) = eval_ans ans in
   print_string ("import numpy as np\ndef myExpression("^param^"):\n");
