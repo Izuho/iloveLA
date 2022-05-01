@@ -24,26 +24,28 @@ s:R
 ~~~
 ~~~
 import numpy as np
-def myExpression(s, t):
+def myExpression(t, s):
 	# DeclIN
 	# DeclIN
 	return (np.power((t),3))+(np.power((s),5))
 
 if __name__ == '__main__':
-	s=np.random.randn(1,1)
-	print('s : ')
-	print(s)
 	t=np.random.randn(1,1)
 	print('t : ')
 	print(t)
-	print(myExpression(s, t))
+	s=np.random.randn(1,1)
+	print('s : ')
+	print(s)
+	print('ans : ')
+	print(myExpression(t, s))
 ~~~
 ~~~
-s : 
-[[ 0.01705895]]
 t : 
-[[ 0.77476029]]
-[[ 0.46505259]]
+[[ 1.33811877]]
+s : 
+[[-0.74239184]]
+ans : 
+[[ 2.17047433]]
 ~~~
 ### 2.
 ~~~
@@ -60,8 +62,7 @@ d=[6
 g:R^2
 ~~~
 ~~~
-import numpy as np
-def myExpression(g, c, a):
+def myExpression(a, c, g):
 	# DeclIN
 	b = np.array([[3, -1],[55, 7],[3, 4]])
 	# DeclIN
@@ -70,30 +71,32 @@ def myExpression(g, c, a):
 	return ((0)-(2*np.dot((((b)+(a)).T),(np.dot((np.power(np.linalg.inv(c), 2)),(d))))))+((g).T)
 
 if __name__ == '__main__':
-	g=np.random.randn(1,2)
-	print('g : ')
-	print(g)
-	c=np.random.randn(3,3)
-	print('c : ')
-	print(c)
 	a=np.random.randn(3,2)
 	print('a : ')
 	print(a)
-	print(myExpression(g, c, a))
+	c=np.random.randn(3,3)
+	print('c : ')
+	print(c)
+	g=np.random.randn(1,2)
+	print('g : ')
+	print(g)
+	print('ans : ')
+	print(myExpression(a, c, g))
 ~~~
 ~~~
-g : 
-[[-0.23809394 -1.3033458 ]]
-c : 
-[[ 0.56622972 -1.16681623  0.16576344]
- [ 0.12525813  0.61534704  1.75255671]
- [ 0.19738207  0.89701867  0.87974792]]
 a : 
-[[-0.46620955 -1.23092471]
- [-0.98515407  0.79213559]
- [ 2.61496829 -0.72034392]]
-[[-1476.69247924]
- [   57.11414637]]
+[[-0.3430053  -0.50330435]
+ [ 0.12583491  0.51064486]
+ [ 0.17391081  0.70807231]]
+c : 
+[[-0.13439732  0.7990794   0.83840651]
+ [-0.82930956 -0.2947173  -2.43444278]
+ [ 0.70319865  1.1865112   0.00401365]]
+g : 
+[[-0.27781355 -0.95130406]]
+ans : 
+[[-579.78414486]
+ [ -47.14506954]]
 ~~~
 ### 3.
 ~~~
