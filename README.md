@@ -18,7 +18,9 @@ https://iheartla.github.io/
 ### 1.
 ~~~
 t^3+s^5
+
 where
+
 t:R
 s:R
 ~~~
@@ -51,6 +53,7 @@ ans :
 ~~~
 -2(b+a)^Tc^-2d+g^T
 where
+
 a:R^(3*2)
 b=[3 -1 
    55 7
