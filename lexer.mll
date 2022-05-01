@@ -4,7 +4,7 @@ exception Eof
 }
 rule token = parse
     [' ' '\t']     { token lexbuf }     (* skip blanks *)
-  | '\n'           { EOL }
+  | '\n'+          { EOL }
   | ':'	 	   { IN }
   | '='            { EQ }
   | 'R'		   { JISSU }
