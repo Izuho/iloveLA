@@ -10,6 +10,7 @@ rule token = parse
   | 'R'		   { JISSU }
   | "where"        { WHERE }
   | ['a'-'z']      { VAR(Lexing.lexeme lexbuf) }
+  | ['0'-'9']+ '.' ['0'-'9']*  { FLOAT(float_of_string(Lexing.lexeme lexbuf)) }
   | ['0'-'9']+     { INT(int_of_string(Lexing.lexeme lexbuf)) }
   | "^T"           { TENTI }
   | "^-" ['0'-'9']+ { POWERINT(- int_of_string(Str.string_after (Lexing.lexeme lexbuf) 2)) }

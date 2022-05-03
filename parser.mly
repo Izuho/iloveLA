@@ -1,4 +1,5 @@
 %token <int> INT POWERINT
+%token <float> FLOAT
 %token <string> VAR
 %token WHERE JISSU TIMES
 %token PLUS MINUS TENTI POWER
@@ -27,6 +28,7 @@ semians_:
   | VAR TENTI              { Tenti(AVar($1)) }
   | VAR POWERINT           { Power(AVar($1), $2) }
   | INT                        { AInt($1) }
+  | FLOAT                      { AFloat($1) }
   | LPAREN ans RPAREN          { $2 }
   | LPAREN ans RPAREN TENTI    { Tenti($2) }
   | LPAREN ans RPAREN POWERINT { Power($2,$4) }
@@ -70,8 +72,14 @@ mat:
   | vector EOL mat { Mat($1, $3) }
 
 
+
 vector:
-    INT vector                     { Vector($1, $2) }
-  | MINUS INT vector %prec UMINUS  { Vector(-$2, $3) }
-  | INT                            { Vector($1, EndVEC) }
-  | MINUS INT %prec UMINUS         { Vector(-$2, EndVEC) }
+    INT vector                     { Syntax.Vector(YInt($1), $2) }
+  | MINUS INT vector %prec UMINUS  { Vector(YInt(-$2), $3) }
+  | INT                            { Vector(YInt($1), EndVEC) }
+  | MINUS INT %prec UMINUS         { Vector(YInt(-$2), EndVEC) }
+  | FLOAT vector                     { Vector(Syntax.YFloat($1), $2) }
+  | MINUS FLOAT vector %prec UMINUS  { Syntax.Vector(Syntax.YFloat(-.$2), $3) }
+  | FLOAT                            { Vector(YFloat($1), EndVEC) }
+  | MINUS FLOAT %prec UMINUS         { Vector(YFloat(-.$2), EndVEC) }
+

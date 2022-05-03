@@ -2,8 +2,12 @@ exception SynErr
 
 type name = string 
 
+type youso =
+  | YInt of int
+  | YFloat of float
+          
 type vector =
-  | Vector of int * vector
+  | Vector of youso * vector
   | EndVEC
           
 type mat =
@@ -22,6 +26,7 @@ type ans =
   | Tenti of ans
   | Power of ans * int
   | AInt of int
+  | AFloat of float
   | AVar of name
   | AMat of mat
   | AZeros

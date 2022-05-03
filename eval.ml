@@ -23,10 +23,17 @@ let rec search_var v = List.assoc v (!dict)
 let rec eval_vec vec str i =
   match vec with
   | Vector (ii, nvec) ->
-     if str = "" then
-       eval_vec nvec (string_of_int ii) (i+1)
-     else
-       eval_vec nvec (str^", "^(string_of_int ii)) (i+1)
+     (match ii with
+      | YInt (n) -> 
+         if str = "" then
+           eval_vec nvec (string_of_int n) (i+1)
+         else
+           eval_vec nvec (str^", "^(string_of_int n)) (i+1)
+      | YFloat (n) ->
+         if str = "" then
+           eval_vec nvec (string_of_float n) (i+1)
+         else
+           eval_vec nvec (str^", "^(string_of_float n)) (i+1))
   | EndVEC -> (("["^str^"]"), i)
 
 let rec eval_mat mat str i j =
@@ -235,6 +242,8 @@ let rec eval_ans ans =
          raise ShapeErr)
    | AInt (n) ->
       (string_of_int n, (-2,-2))
+   | AFloat (n) ->
+      (string_of_float n, (-2,-2))
    | AVar (v) ->
       (try
          let a = search_var v in a
