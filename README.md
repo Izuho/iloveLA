@@ -14,6 +14,12 @@ https://iheartla.github.io/
 - '∈'の代わりに':'
 - その他、適用できるLA文法はとても狭い
 
+## 使い方
+1. `input.txt`にLA文法で数式を書き込む
+2. `make`で実行ファイル`main`を作る
+3. `./main > out.py`などとして、pythonのコードに変換する
+4. `python out.py`などでpythonで確認してみる
+
 ## 例
 ### 1.
 ~~~
