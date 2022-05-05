@@ -17,9 +17,11 @@ https://iheartla.github.io/
 
 ## 使い方
 1. `input.txt`にLA文法で数式を書き込む
-2. `make`で実行ファイル`main`を作る
+2. `make`で実行ファイル`main`を作る[^1]
 3. `./main > out.py`などとして、pythonのコードに変換する
 4. `python out.py`などでpythonで確認してみる
+
+[^1] `10 shift/reduce conflict`が存在するが`parser.output`で全て期待通りに動くことを確認してある
 
 ## 例
 ### 1.
