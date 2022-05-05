@@ -9,6 +9,7 @@ rule token = parse
   | '='            { EQ }
   | 'R'		   { JISSU }
   | "where"        { WHERE }
+  | '/'		   { DIV }
   | ['a'-'z']      { VAR(Lexing.lexeme lexbuf) }
   | ['0'-'9']+ '.' ['0'-'9']*  { FLOAT(float_of_string(Lexing.lexeme lexbuf)) }
   | ['0'-'9']+     { INT(int_of_string(Lexing.lexeme lexbuf)) }

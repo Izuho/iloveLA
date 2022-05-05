@@ -209,6 +209,16 @@ let rec eval_ans ans =
            let d = string_of_int s2r in
            print_string ("Minus with ("^a^","^b^") and ("^c^","^d^")\n");
            raise ShapeErr)
+   | Div (ans1, ans2) ->
+      let (a, (s1l,s1r)) = eval_ans ans1 in
+      let (b, (s2l,s2r)) = eval_ans ans2 in
+      if s2l < 2 && s2r < 2 then
+        ("("^a^"/"^b^")", (s1l,s1r))
+      else
+        let c = string_of_int s2l in
+        let d = string_of_int s2r in
+        print_string ("Div by ("^c^","^d^")\n");
+        raise ShapeErr
    | Mult (ans1, ans2) ->
       let (a, (s1l,s1r)) = eval_ans ans1 in
       let (b, (s2l,s2r)) = eval_ans ans2 in

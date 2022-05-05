@@ -22,6 +22,7 @@ type env =
 type ans =
   | Plus of ans * ans
   | Mult of ans * ans
+  | Div of ans * ans
   | Minus of ans * ans
   | Tenti of ans
   | Power of ans * int

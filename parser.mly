@@ -1,7 +1,7 @@
 %token <int> INT POWERINT
 %token <float> FLOAT
 %token <string> VAR
-%token WHERE JISSU TIMES
+%token WHERE JISSU TIMES DIV
 %token PLUS MINUS TENTI POWER
 %token LPAREN RPAREN
 %token EQ IN LKAGI RKAGI
@@ -48,6 +48,7 @@ semians_:
 
 semians:
     semians_ semians { Syntax.Mult($1,$2) }
+  | semians DIV semians_ { Syntax.Div($1,$3) }
   | semians_ { $1 }
 
 ans:
